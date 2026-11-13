@@ -1,0 +1,3 @@
+{
+  "extends": "@hono_homework_2/config/tsconfig.base.json"
+}

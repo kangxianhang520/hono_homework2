@@ -1,0 +1,24 @@
+{
+  "name": "@hono_homework_2/api",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono_homework_2/auth": "workspace:*",
+    "@hono_homework_2/db": "workspace:*",
+    "@trpc/client": "catalog:",
+    "@trpc/server": "catalog:",
+    "@types/pg": "^8.23.1",
+    "drizzle-orm": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@hono_homework_2/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
