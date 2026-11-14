@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
     "build": "vite build",
-    "serve": "vite preview",
-    "start": "vite",
     "check-types": "vite build && tsc --noEmit",
-    "env:generate": "varlock codegen"
+    "dev": "vite dev",
+    "env:generate": "varlock codegen",
+    "serve": "vite preview",
+    "start": "vite"
   },
   "dependencies": {
     "@hono_homework_2/api": "workspace:*",
