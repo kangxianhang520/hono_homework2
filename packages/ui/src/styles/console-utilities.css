@@ -1,0 +1,50 @@
+/*
+ * Shared composite utilities for the console UI.
+ * Only patterns that repeat across several components live here;
+ * one-off layout stays inline as Tailwind classes.
+ */
+
+/* Kept local so icon ligatures are deterministic in visual-regression runs. */
+@font-face {
+	font-family: "Material Symbols Outlined";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/fonts/material-symbols-outlined.ttf") format("truetype");
+}
+
+/* Elevated card / section surface (shadow is chosen per use by <Panel>). */
+@utility panel {
+	@apply rounded-panel bg-surface-container-low p-space-lg;
+}
+
+/* Base look for text inputs, textareas and selects. */
+@utility field-control {
+	@apply w-full rounded-control bg-surface-container-lowest font-code text-label-code text-on-surface transition-colors placeholder:text-outline/60 focus:bg-surface-container-high focus:outline-none disabled:cursor-not-allowed disabled:text-outline disabled:opacity-80;
+}
+
+/* Small monospaced badge (scopes, field types, tags). */
+@utility chip {
+	@apply rounded-chip px-2 py-0.5 font-code text-label-code-sm;
+}
+
+/* Uppercase monospaced eyebrow label. */
+@utility eyebrow {
+	@apply font-code text-label-code-sm text-outline uppercase tracking-wider;
+}
+
+/* Material Symbols glyph; size is set by the Icon component. */
+@utility icon-glyph {
+	display: inline-block;
+	/* biome-ignore lint/a11y/useGenericFontNames: an icon font must not fall back to rendering ligature text */
+	font-family: "Material Symbols Outlined";
+	font-style: normal;
+	font-weight: normal;
+	font-feature-settings: "liga";
+	-webkit-font-smoothing: antialiased;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	white-space: nowrap;
+	user-select: none;
+	direction: ltr;
+}

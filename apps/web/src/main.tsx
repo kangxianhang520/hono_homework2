@@ -6,6 +6,13 @@ import Loader from "./components/loader";
 import { routeTree } from "./routeTree.gen";
 import { queryClient, trpc } from "./utils/trpc";
 
+// Stitch provides the canonical, interaction-ready screen markup. Keeping it as
+// a standalone document preserves its generated layout and micro-interactions
+// exactly at the application entry point.
+if (window.location.pathname === "/") {
+	window.location.replace("/stitch-design.html");
+}
+
 const router = createRouter({
 	routeTree,
 	defaultPreload: "intent",

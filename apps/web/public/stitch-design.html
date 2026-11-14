@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-container":"#e29100","secondary-fixed":"#e1e0ff","background":"#10141a","surface":"#10141a","primary-container":"#10b981","on-primary-fixed-variant":"#005236","surface-dim":"#10141a","secondary-fixed-dim":"#c0c1ff","on-secondary-fixed-variant":"#2f2ebe","on-primary-fixed":"#002113","inverse-on-surface":"#2d3137","on-background":"#dfe2eb","outline-variant":"#3c4a42","on-tertiary":"#472a00","primary-fixed-dim":"#4edea3","secondary-container":"#3131c0","inverse-surface":"#dfe2eb","primary-fixed":"#6ffbbe","on-secondary":"#1000a9","surface-container":"#1c2026","on-tertiary-fixed":"#2a1700","tertiary-fixed":"#ffddb8","on-surface-variant":"#bbcabf","primary":"#4edea3","outline":"#86948a","tertiary":"#ffb95f","secondary":"#c0c1ff","surface-container-low":"#181c22","on-tertiary-fixed-variant":"#653e00","on-surface":"#dfe2eb","inverse-primary":"#006c49","on-error":"#690005","on-secondary-fixed":"#07006c","surface-container-high":"#262a31","surface-variant":"#31353c","tertiary-fixed-dim":"#ffb95f","on-secondary-container":"#b0b2ff","surface-container-highest":"#31353c","on-error-container":"#ffdad6","surface-tint":"#4edea3","on-primary":"#003824","on-tertiary-container":"#523200","error-container":"#93000a","surface-container-lowest":"#0a0e14","error":"#ffb4ab","surface-bright":"#353940","on-primary-container":"#00422b"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"gutter-desktop":"1.5rem","space-sm":"0.5rem","space-md":"1rem","margin-desktop":"2rem","gutter":"1rem","space-lg":"1.5rem","margin":"1rem","space-xl":"2.5rem","space-xs":"0.25rem"},fontFamily:{"headline-lg":["Geist"],"label-ui":["Geist"],"label-code":["JetBrains Mono"],"headline-lg-mobile":["Geist"],"body-md":["Geist"],"body-sm":["Geist"],"headline-sm":["Geist"],"label-code-sm":["JetBrains Mono"],"headline-xl-mobile":["Geist"],"headline-xl":["Geist"],"body-lg":["Geist"]},fontSize:{"headline-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-ui":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"label-code":["13px",{"lineHeight":"18px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-lg-mobile":["20px",{"lineHeight":"28px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"500"}],"label-code-sm":["11px",{"lineHeight":"16px","letterSpacing":"0em","fontWeight":"400"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.025em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm bg-surface-container-low"><div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">terminal</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">GitHub Inspector</span><span class="font-label-code-sm text-label-code-sm text-outline mt-0.5">v2.4.0-edge</span></div></div><div class="px-space-md py-space-sm"><div class="px-space-sm py-space-xs font-label-code-sm text-label-code-sm text-outline uppercase tracking-wider">Developer Scopes</div></div><nav class="flex flex-col gap-1 px-space-md" data-active-classes="bg-surface-container-high text-primary font-bold"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="profile-overview" href="#"><span class="material-symbols-outlined text-[18px]">badge</span><span>个人账户概览 (Profile Overview)</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="token-and-auth" href="#"><span class="material-symbols-outlined text-[18px]">key</span><span>Token 授权与配置 (Token & Auth)</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg transition-colors bg-surface-container-high text-primary font-bold" data-path="custom-fields" href="#"><span class="material-symbols-outlined text-[18px]">data_object</span><span>动态字段管理 (Custom Fields)</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="request-logs" href="#"><span class="material-symbols-outlined text-[18px]">monitoring</span><span>API 请求日志 (Request Logs)</span></a></nav></div><div class="p-space-md bg-surface-container-lowest m-space-md rounded-xl flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-ui text-label-ui text-on-surface-variant">Rate Limit</span><span class="font-label-code-sm text-label-code-sm text-primary">4,982 / 5,000</span></div><div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full w-[94%]"></div></div><div class="flex justify-between items-center pt-space-xs"><span class="font-label-code-sm text-label-code-sm text-outline">Resets in 42m</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Core API</span></div></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)] px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-code text-label-code text-on-surface-variant"><span class="text-on-surface font-semibold">GitHub</span><span class="text-outline">/</span><span>Account Inspector</span><span class="text-outline">/</span><span class="text-primary font-medium">Profile & Fields</span></div><div class="h-4 w-px bg-surface-container-high hidden md:block"></div><div class="inline-flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-surface-container-high text-primary font-label-code-sm text-label-code-sm"><span class="w-2 h-2 rounded-full bg-primary"></span><span>Token Connected: github_pat_11A***</span></div></div><div class="flex items-center gap-space-sm"><button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">file_download</span><span>Export JSON</span></button><button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container font-label-ui text-label-ui text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[16px]">delete_sweep</span><span>Clear Cache</span></button><div class="h-5 w-px bg-surface-container-high mx-space-xs"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-surface px-space-lg py-space-lg flex-1"><div class="flex flex-col w-full pb-24">
+<!-- Top Telemetry & PAT Authentication Banner -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden mb-space-lg">
+<div class="absolute -right-16 -top-16 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-lg relative z-10">
+<div class="flex flex-col gap-space-xs max-w-xl">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-code-sm text-label-code-sm text-primary uppercase tracking-wider">REST API v3 Realtime Session</span>
+<span class="text-outline mx-1">•</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Host: api.github.com</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Personal Access Token 验证与数据同步</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">配置拥有 <code class="font-label-code-sm text-primary bg-surface-container-highest px-1.5 py-0.5 rounded">user</code> 读写权限的 PAT，即可一键实时拉取并在本地管理自定义扩展属性。</p>
+</div>
+<!-- PAT Input Form Row -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm w-full xl:w-auto">
+<div class="relative flex-1 sm:w-80">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</span>
+<input class="w-full h-10 pl-9 pr-10 bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" id="pat-input" type="password" value="ghp_v98Fj2389KLasdf08213mklAsdf8231"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface transition-colors" id="toggle-pat-btn" title="显示/隐藏 Token" type="button">
+<span class="material-symbols-outlined text-[18px]" id="toggle-pat-icon">visibility_off</span>
+</button>
+</div>
+<button class="h-10 px-space-md bg-primary hover:bg-primary-container text-on-primary font-label-ui text-label-ui rounded-lg flex items-center justify-center gap-space-xs transition-all shadow-md active:scale-95 whitespace-nowrap" id="sync-btn" type="button">
+<span class="material-symbols-outlined text-[18px]" id="sync-spinner">sync</span>
+<span id="sync-label">获取/同步数据</span>
+</button>
+</div>
+</div>
+<!-- Scopes, Rate Limit Bar & Notice -->
+<div class="mt-space-md pt-space-md grid grid-cols-1 md:grid-cols-12 gap-space-md items-center bg-surface-container-lowest/60 p-space-md rounded-xl">
+<div class="md:col-span-7 flex flex-wrap items-center gap-space-xs">
+<span class="font-label-code-sm text-label-code-sm text-outline mr-space-xs uppercase">Granted Scopes:</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm">read:user</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm">user:email</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm">repo</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm">workflow</span>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span>Active
+        </span>
+</div>
+<div class="md:col-span-5 flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-outline">API 配额调用余量:</span>
+<span class="text-primary font-medium">4,982 / 5,000 (99.6%)</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 94%;"></div>
+</div>
+</div>
+</div>
+<!-- Sync status alert tag -->
+<div class="mt-space-sm flex items-center gap-space-sm text-primary font-body-sm text-body-sm bg-primary/10 px-space-md py-space-xs rounded-lg">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>数据已通过 GitHub REST API v3 成功同步，可在下方查看账户基本信息并自由增加或删除附加字段属性。</span>
+</div>
+</section>
+<!-- Profile Quick Glance Card (Bento Style) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-lg">
+<!-- Left Identity Panel -->
+<div class="lg:col-span-4 bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="flex flex-col items-center text-center">
+<div class="relative group mb-space-md">
+<div class="w-24 h-24 rounded-full overflow-hidden bg-surface-container-highest shadow-md">
+<img class="w-full h-full object-cover" data-alt="Digital close up headshot portrait of a modern software engineer wearing dark technical apparel, clean studio lighting with soft teal cyan ambient backlights, high resolution cinematic tech portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb2a_nHY520MPy5INl7FGvQkxbEZWsnknB3jUNp--6ymBpXuj8rDfjfzeojaA5OdJi5U4O-E9L1P_bFwTWHqAh9Sl-i2_x7wwMiwPFFHK5qc05a2iNaAWisD9vU4zyelsoO7DywKod76v0sKCcC5ARiZ2BdE2S9yX_5C1eQf4-x7JBmNC1NC37bcUDxlWNPbDGSXxlVAiv3d7cNFDrWNm7vHJNkJE6N3PHfijXtg"/>
+</div>
+<span class="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-primary flex items-center justify-center text-surface-container-lowest" title="Authenticated via PAT">
+<span class="material-symbols-outlined text-[14px] font-bold">done</span>
+</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Alex Chen</h3>
+<div class="flex items-center gap-space-xs mt-1">
+<span class="font-label-code text-label-code text-primary">@octo-coder</span>
+<span class="text-outline">•</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-ui text-label-ui">Core Contributor</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-sm text-center line-clamp-2">
+          Full-stack Architect & Open Source Enthusiast. Building resilient distributed systems and developer tooling.
+        </p>
+</div>
+<!-- Quick Metrics Grid -->
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-lowest/80 p-space-sm rounded-xl my-space-md text-center">
+<div class="flex flex-col py-1">
+<span class="font-label-code text-label-code text-on-surface font-semibold">64</span>
+<span class="font-label-code-sm text-label-code-sm text-outline">Public Repos</span>
+</div>
+<div class="flex flex-col py-1 border-x border-surface-container-high">
+<span class="font-label-code text-label-code text-on-surface font-semibold">1.4k</span>
+<span class="font-label-code-sm text-label-code-sm text-outline">Followers</span>
+</div>
+<div class="flex flex-col py-1">
+<span class="font-label-code text-label-code text-on-surface font-semibold">280</span>
+<span class="font-label-code-sm text-label-code-sm text-outline">Following</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-outline"><span class="material-symbols-outlined text-[16px]">domain</span>组织</span>
+<span class="text-on-surface font-medium">Acme Corp Labs</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-outline"><span class="material-symbols-outlined text-[16px]">location_on</span>位置</span>
+<span class="text-on-surface font-medium">San Francisco, CA</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1.5 text-outline"><span class="material-symbols-outlined text-[16px]">schedule</span>建号时间</span>
+<span class="text-on-surface font-medium">2018-04-12</span>
+</div>
+<a class="mt-space-sm inline-flex items-center justify-center gap-1 text-primary hover:underline font-label-ui text-label-ui" href="https://github.com/octo-coder" target="_blank">
+<span>访问公开 GitHub 主页</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Right Profile Analytics & Visual Activity Sparkline -->
+<div class="lg:col-span-8 bg-surface-container-low p-space-lg rounded-xl flex flex-col justify-between shadow-lg">
+<div class="flex items-center justify-between pb-space-sm">
+<div>
+<span class="font-label-code-sm text-label-code-sm text-outline uppercase tracking-wider">Telemetry Insights</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mt-0.5">代码提交与 API 同步热度</h4>
+</div>
+<div class="flex items-center gap-space-xs font-label-code-sm text-label-code-sm bg-surface-container px-space-sm py-1 rounded-lg">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface">近 30 天 284 次修改</span>
+</div>
+</div>
+<!-- SVG Data Visualization -->
+<div class="my-space-md p-space-md bg-surface-container-lowest rounded-xl flex flex-col gap-space-sm">
+<div class="flex justify-between items-center text-outline font-label-code-sm text-label-code-sm">
+<span>Monthly API Activity Density</span>
+<span>Avg response: 112ms</span>
+</div>
+<div class="h-24 w-full flex items-end">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 500 80">
+<path d="M0,60 Q30,20 60,45 T120,30 T180,65 T240,15 T300,40 T360,10 T420,55 T480,25 L500,30 L500,80 L0,80 Z" fill="currentColor" fill-opacity="0.08"></path>
+<path d="M0,60 Q30,20 60,45 T120,30 T180,65 T240,15 T300,40 T360,10 T420,55 T480,25 L500,30" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle class="animate-ping" cx="240" cy="15" fill="currentColor" r="4"></circle>
+<circle cx="240" cy="15" fill="#10141a" r="3" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="360" cy="10" fill="#10141a" r="3" stroke="currentColor" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between font-label-code-sm text-label-code-sm text-outline px-1">
+<span>Day 01</span>
+<span>Day 08</span>
+<span>Day 15</span>
+<span>Day 22</span>
+<span>Today</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md pt-space-xs font-label-code-sm text-label-code-sm">
+<div class="p-space-sm bg-surface-container rounded-lg">
+<span class="text-outline block">Sync Latency</span>
+<span class="text-on-surface font-semibold text-[14px]">84ms</span>
+</div>
+<div class="p-space-sm bg-surface-container rounded-lg">
+<span class="text-outline block">Metadata Schema</span>
+<span class="text-primary font-semibold text-[14px]">v2.1 Validated</span>
+</div>
+<div class="p-space-sm bg-surface-container rounded-lg">
+<span class="text-outline block">GraphQL Node</span>
+<span class="text-on-surface font-semibold text-[14px]">MDQ6VXNlcjU4MzI=</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Two-Column Form Management: Standard & Dynamic Custom Fields -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- LEFT: Standard GitHub Profile Fields -->
+<div class="xl:col-span-5 flex flex-col gap-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col h-full">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">account_box</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">标准档案字段</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">对应 GitHub API 原生用户数据结构</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container text-outline font-label-code-sm text-label-code-sm">Schema: core</span>
+</div>
+<form class="space-y-space-md flex-1" id="standard-profile-form">
+<!-- Username (Readonly) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-ui text-label-ui text-on-surface">用户名 (Username)</label>
+<span class="font-label-code-sm text-label-code-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lock</span>只读主键
+              </span>
+</div>
+<input class="w-full h-9 px-space-md bg-surface-container-lowest text-outline font-label-code text-label-code rounded-lg opacity-80 cursor-not-allowed" disabled="" name="login" type="text" value="octo-coder"/>
+</div>
+<!-- Full Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-ui text-label-ui text-on-surface">显示姓名 (Display Name)</label>
+<input class="w-full h-9 px-space-md bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" name="name" type="text" value="Alex Chen"/>
+</div>
+<!-- Public Email -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-ui text-label-ui text-on-surface">公开电子邮箱 (Public Email)</label>
+<input class="w-full h-9 px-space-md bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" name="email" type="email" value="alex.chen@devtools.io"/>
+</div>
+<!-- Bio -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-ui text-label-ui text-on-surface">个人简介 (Bio)</label>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">支持 Markdown</span>
+</div>
+<textarea class="w-full p-space-sm bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors resize-none" name="bio" rows="3">Full-stack Architect & Open Source Enthusiast. Focused on high-throughput backend services and compiler toolchains.</textarea>
+</div>
+<!-- Blog / Website -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-ui text-label-ui text-on-surface">个人主页/博客 (Blog / Website)</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[16px]">link</span>
+</span>
+<input class="w-full h-9 pl-9 pr-space-md bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" name="blog" type="url" value="https://blog.alexchen.dev"/>
+</div>
+</div>
+<!-- Company -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-ui text-label-ui text-on-surface">所在公司 / 组织 (Company)</label>
+<input class="w-full h-9 px-space-md bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" name="company" type="text" value="@AcmeCorp-Labs"/>
+</div>
+<!-- Location & Twitter Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-ui text-label-ui text-on-surface">地理位置 (Location)</label>
+<input class="w-full h-9 px-space-md bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" name="location" type="text" value="San Francisco, CA"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-ui text-label-ui text-on-surface">Twitter 账号</label>
+<input class="w-full h-9 px-space-md bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" name="twitter_username" type="text" value="@alexchen_dev"/>
+</div>
+</div>
+</form>
+</div>
+</div>
+<!-- RIGHT: Dynamic Custom Metadata Fields (增与删的核心交互区) -->
+<div class="xl:col-span-7 flex flex-col gap-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col h-full">
+<!-- Section Header with Quick Counter -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">data_object</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">附加自定义字段 (Custom Metadata & Tags)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+              支持自由添加、编辑或删除个人档案附加字段，方便同步至内部团队花名册、SSO 目录或构建管道。
+            </p>
+</div>
+<button class="inline-flex items-center justify-center gap-space-xs px-space-md py-1.5 bg-primary hover:bg-primary-container text-on-primary font-label-ui text-label-ui rounded-lg transition-colors shadow-sm self-start sm:self-center" id="toggle-add-row-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>新增字段</span>
+</button>
+</div>
+<!-- Inline Dynamic Add Row Card (Collapsible) -->
+<div class="mb-space-md p-space-md bg-surface-container rounded-xl flex flex-col gap-space-sm hidden transition-all duration-300" id="add-field-card">
+<div class="flex items-center justify-between">
+<span class="font-label-ui text-label-ui text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">playlist_add</span>
+              新建扩展字段属性
+            </span>
+<span class="font-label-code-sm text-label-code-sm text-outline">自动加入本地状态</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-12 gap-space-sm">
+<div class="sm:col-span-4">
+<label class="block font-label-code-sm text-label-code-sm text-outline mb-1">字段名 (Key)</label>
+<input class="w-full h-8 px-space-sm bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" id="new-field-key" placeholder="例如: GPG Key ID" type="text"/>
+</div>
+<div class="sm:col-span-3">
+<label class="block font-label-code-sm text-label-code-sm text-outline mb-1">类型 (Type)</label>
+<select class="w-full h-8 px-space-xs bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" id="new-field-type">
+<option value="Text">Text (文本)</option>
+<option value="Tags">Tags (标签组)</option>
+<option value="URL">URL (链接)</option>
+<option value="Number">Number (数值)</option>
+</select>
+</div>
+<div class="sm:col-span-5">
+<label class="block font-label-code-sm text-label-code-sm text-outline mb-1">字段值 (Value)</label>
+<input class="w-full h-8 px-space-sm bg-surface-container-lowest text-on-surface font-label-code text-label-code rounded-lg focus:outline-none focus:bg-surface-container-high transition-colors" id="new-field-val" placeholder="例如: 4A82F9108E2101BC" type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-1 bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant font-label-ui text-label-ui rounded-lg transition-colors" id="cancel-add-btn" type="button">
+              取消
+            </button>
+<button class="px-space-md py-1 bg-primary hover:bg-primary-container text-on-primary font-label-ui text-label-ui rounded-lg transition-colors flex items-center gap-1" id="confirm-add-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+              确认添加
+            </button>
+</div>
+</div>
+<!-- Custom Fields Interactive List / Table -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden shadow-inner">
+<div class="grid grid-cols-12 px-space-md py-2.5 bg-surface-container-high text-outline font-label-code-sm text-label-code-sm uppercase tracking-wider">
+<div class="col-span-4 sm:col-span-3">字段键名 (Key)</div>
+<div class="col-span-2 hidden sm:block">类型 (Type)</div>
+<div class="col-span-6 sm:col-span-5">字段数值 (Value)</div>
+<div class="col-span-2 text-right">操作</div>
+</div>
+<!-- Dynamic Field Rows Container -->
+<div class="divide-y divide-surface-container" id="custom-fields-container">
+<!-- Row 1: GPG Key ID -->
+<div class="field-row grid grid-cols-12 items-center px-space-md py-3 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 sm:col-span-3 font-label-code text-label-code text-on-surface font-medium truncate" data-key="GPG Key ID">
+                GPG Key ID
+              </div>
+<div class="col-span-2 hidden sm:block">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-code-sm text-label-code-sm">Text</span>
+</div>
+<div class="col-span-6 sm:col-span-5 font-label-code text-label-code text-on-surface-variant truncate pr-2" title="4A82F9108E2101BC">
+                4A82F9108E2101BC
+              </div>
+<div class="col-span-2 flex items-center justify-end gap-1">
+<button class="delete-row-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error/10 transition-colors" title="删除字段 (Delete)" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Tech Stack -->
+<div class="field-row grid grid-cols-12 items-center px-space-md py-3 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 sm:col-span-3 font-label-code text-label-code text-on-surface font-medium truncate" data-key="Tech Stack">
+                Tech Stack
+              </div>
+<div class="col-span-2 hidden sm:block">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-primary font-label-code-sm text-label-code-sm">Tags</span>
+</div>
+<div class="col-span-6 sm:col-span-5 flex flex-wrap gap-1 pr-2">
+<span class="px-1.5 py-0.2 bg-surface-container text-on-surface font-label-code-sm text-label-code-sm rounded">TypeScript</span>
+<span class="px-1.5 py-0.2 bg-surface-container text-on-surface font-label-code-sm text-label-code-sm rounded">Rust</span>
+<span class="px-1.5 py-0.2 bg-surface-container text-on-surface font-label-code-sm text-label-code-sm rounded">React</span>
+<span class="px-1.5 py-0.2 bg-surface-container text-on-surface font-label-code-sm text-label-code-sm rounded">GraphQL</span>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1">
+<button class="delete-row-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error/10 transition-colors" title="删除字段 (Delete)" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 3: Discord Handle -->
+<div class="field-row grid grid-cols-12 items-center px-space-md py-3 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 sm:col-span-3 font-label-code text-label-code text-on-surface font-medium truncate" data-key="Discord Handle">
+                Discord Handle
+              </div>
+<div class="col-span-2 hidden sm:block">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-code-sm text-label-code-sm">Text</span>
+</div>
+<div class="col-span-6 sm:col-span-5 font-label-code text-label-code text-on-surface-variant truncate pr-2">
+                alexc#4092
+              </div>
+<div class="col-span-2 flex items-center justify-end gap-1">
+<button class="delete-row-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error/10 transition-colors" title="删除字段 (Delete)" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 4: Sponsorship Link -->
+<div class="field-row grid grid-cols-12 items-center px-space-md py-3 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 sm:col-span-3 font-label-code text-label-code text-on-surface font-medium truncate" data-key="Sponsorship Link">
+                Sponsorship Link
+              </div>
+<div class="col-span-2 hidden sm:block">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-label-code-sm text-label-code-sm">URL</span>
+</div>
+<div class="col-span-6 sm:col-span-5 font-label-code text-label-code text-primary truncate pr-2">
+<a class="hover:underline flex items-center gap-1" href="https://github.com/sponsors/octo-coder" target="_blank">
+<span>https://github.com/sponsors/octo-coder</span>
+<span class="material-symbols-outlined text-[13px]">north_east</span>
+</a>
+</div>
+<div class="col-span-2 flex items-center justify-end gap-1">
+<button class="delete-row-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error/10 transition-colors" title="删除字段 (Delete)" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 5: Preferred Timezone -->
+<div class="field-row grid grid-cols-12 items-center px-space-md py-3 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-4 sm:col-span-3 font-label-code text-label-code text-on-surface font-medium truncate" data-key="Preferred Timezone">
+                Preferred Timezone
+              </div>
+<div class="col-span-2 hidden sm:block">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-code-sm text-label-code-sm">Text</span>
+</div>
+<div class="col-span-6 sm:col-span-5 font-label-code text-label-code text-on-surface-variant truncate pr-2">
+                UTC-7 (Pacific Time)
+              </div>
+<div class="col-span-2 flex items-center justify-end gap-1">
+<button class="delete-row-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error/10 transition-colors" title="删除字段 (Delete)" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Custom Field Stats Footer Note -->
+<div class="flex items-center justify-between pt-space-md text-outline font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>当前已载入 <span class="text-on-surface font-semibold" id="fields-count">5</span> 项扩展属性</span>
+</div>
+<span>自动持久化至内部存储</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Sticky Bottom Global Action Toolbar -->
+<div class="fixed bottom-0 left-72 right-0 bg-surface-container-low/95 backdrop-blur-md px-space-lg py-space-sm z-30 shadow-2xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant hidden sm:inline">工作区就绪 • 无未保存冲突</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-ui text-label-ui transition-colors flex items-center gap-1.5" id="reset-form-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>重置修改</span>
+</button>
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-ui text-label-ui transition-colors flex items-center gap-1.5" id="export-json-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+<span class="hidden sm:inline">导出配置为</span> JSON
+      </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-ui text-label-ui transition-all shadow-md flex items-center gap-1.5 active:scale-95 font-semibold" id="save-profile-btn" type="button">
+<span class="material-symbols-outlined text-[18px]" id="save-icon">cloud_done</span>
+<span>保存档案与自定义字段</span>
+</button>
+</div>
+</div>
+<!-- Micro-interaction / Toast Container -->
+<div class="fixed top-20 right-6 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 pointer-events-none bg-primary text-on-primary px-space-md py-space-sm rounded-lg shadow-xl font-label-ui text-label-ui flex items-center gap-space-xs" id="toast">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+<span id="toast-msg">操作已成功完成</span>
+</div>
+</div>
+<script>
+  (function initInspector() {
+    // DOM Elements
+    const patInput = document.getElementById('pat-input');
+    const togglePatBtn = document.getElementById('toggle-pat-btn');
+    const togglePatIcon = document.getElementById('toggle-pat-icon');
+    const syncBtn = document.getElementById('sync-btn');
+    const syncSpinner = document.getElementById('sync-spinner');
+    const syncLabel = document.getElementById('sync-label');
+
+    const toggleAddRowBtn = document.getElementById('toggle-add-row-btn');
+    const addFieldCard = document.getElementById('add-field-card');
+    const cancelAddBtn = document.getElementById('cancel-add-btn');
+    const confirmAddBtn = document.getElementById('confirm-add-btn');
+    const newFieldKey = document.getElementById('new-field-key');
+    const newFieldType = document.getElementById('new-field-type');
+    const newFieldVal = document.getElementById('new-field-val');
+
+    const customFieldsContainer = document.getElementById('custom-fields-container');
+    const fieldsCount = document.getElementById('fields-count');
+
+    const resetFormBtn = document.getElementById('reset-form-btn');
+    const exportJsonBtn = document.getElementById('export-json-btn');
+    const saveProfileBtn = document.getElementById('save-profile-btn');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+
+    function showToast(text, duration = 3000) {
+      toastMsg.innerText = text;
+      toast.classList.remove('translate-y-[-100px]', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-[-100px]', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, duration);
+    }
+
+    // Toggle PAT Visibility
+    if (togglePatBtn) {
+      togglePatBtn.addEventListener('click', () => {
+        if (patInput.type === 'password') {
+          patInput.type = 'text';
+          togglePatIcon.innerText = 'visibility';
+        } else {
+          patInput.type = 'password';
+          togglePatIcon.innerText = 'visibility_off';
+        }
+      });
+    }
+
+    // Sync button animation
+    if (syncBtn) {
+      syncBtn.addEventListener('click', () => {
+        syncSpinner.classList.add('animate-spin');
+        syncLabel.innerText = '正在请求 API...';
+        syncBtn.classList.add('opacity-75');
+
+        setTimeout(() => {
+          syncSpinner.classList.remove('animate-spin');
+          syncLabel.innerText = '获取/同步数据';
+          syncBtn.classList.remove('opacity-75');
+          showToast('已同步最新 GitHub 账户配置与 Rate Limit 状态');
+        }, 1200);
+      });
+    }
+
+    // Toggle Add Field Card
+    if (toggleAddRowBtn) {
+      toggleAddRowBtn.addEventListener('click', () => {
+        addFieldCard.classList.toggle('hidden');
+        if (!addFieldCard.classList.contains('hidden')) {
+          newFieldKey.focus();
+        }
+      });
+    }
+
+    if (cancelAddBtn) {
+      cancelAddBtn.addEventListener('click', () => {
+        addFieldCard.classList.add('hidden');
+        newFieldKey.value = '';
+        newFieldVal.value = '';
+      });
+    }
+
+    function updateRowCount() {
+      const rows = customFieldsContainer.querySelectorAll('.field-row');
+      if (fieldsCount) {
+        fieldsCount.innerText = rows.length;
+      }
+    }
+
+    // Bind Delete handler to existing & new rows
+    function attachDeleteHandler(row) {
+      const deleteBtn = row.querySelector('.delete-row-btn');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', () => {
+          row.classList.add('opacity-0', 'transition-opacity', 'duration-200');
+          setTimeout(() => {
+            row.remove();
+            updateRowCount();
+            showToast('已移除该扩展字段');
+          }, 200);
+        });
+      }
+    }
+
+    // Attach to initial rows
+    document.querySelectorAll('.field-row').forEach(attachDeleteHandler);
+
+    // Confirm Add New Row
+    if (confirmAddBtn) {
+      confirmAddBtn.addEventListener('click', () => {
+        const key = newFieldKey.value.trim();
+        const type = newFieldType.value;
+        const val = newFieldVal.value.trim();
+
+        if (!key || !val) {
+          showToast('请填写完整的字段键名与字段数值');
+          return;
+        }
+
+        const newRow = document.createElement('div');
+        newRow.className = 'field-row grid grid-cols-12 items-center px-space-md py-3 hover:bg-surface-container-low transition-colors group';
+
+        let typeBadgeClass = 'text-on-surface-variant';
+        if (type === 'Tags') typeBadgeClass = 'text-primary';
+        if (type === 'URL') typeBadgeClass = 'text-secondary';
+        if (type === 'Number') typeBadgeClass = 'text-tertiary';
+
+        let valueContent = `<span class="truncate">${val}</span>`;
+        if (type === 'URL') {
+          valueContent = `<a href="${val}" target="_blank" class="hover:underline flex items-center gap-1 text-primary truncate"><span>${val}</span><span class="material-symbols-outlined text-[13px]">north_east</span></a>`;
+        } else if (type === 'Tags') {
+          const tags = val.split(/[,，]/).map(t => t.trim()).filter(Boolean);
+          valueContent = `<div class="flex flex-wrap gap-1 pr-2">${tags.map(t => `<span class="px-1.5 py-0.2 bg-surface-container text-on-surface font-label-code-sm text-label-code-sm rounded">${t}</span>`).join('')}</div>`;
+        }
+
+        newRow.innerHTML = `
+          <div class="col-span-4 sm:col-span-3 font-label-code text-label-code text-on-surface font-medium truncate" data-key="${key}">
+            ${key}
+          </div>
+          <div class="col-span-2 hidden sm:block">
+            <span class="px-2 py-0.5 rounded bg-surface-container-high ${typeBadgeClass} font-label-code-sm text-label-code-sm">${type}</span>
+          </div>
+          <div class="col-span-6 sm:col-span-5 font-label-code text-label-code text-on-surface-variant truncate pr-2">
+            ${valueContent}
+          </div>
+          <div class="col-span-2 flex items-center justify-end gap-1">
+            <button type="button" class="delete-row-btn p-1.5 rounded-lg text-outline hover:text-error hover:bg-error/10 transition-colors" title="删除字段 (Delete)">
+              <span class="material-symbols-outlined text-[18px]">delete</span>
+            </button>
+          </div>
+        `;
+
+        customFieldsContainer.appendChild(newRow);
+        attachDeleteHandler(newRow);
+        updateRowCount();
+
+        // Clean input
+        newFieldKey.value = '';
+        newFieldVal.value = '';
+        addFieldCard.classList.add('hidden');
+        showToast(`成功新增自定义字段: ${key}`);
+      });
+    }
+
+    // Reset Form
+    if (resetFormBtn) {
+      resetFormBtn.addEventListener('click', () => {
+        document.getElementById('standard-profile-form').reset();
+        showToast('已重置标准档案更改');
+      });
+    }
+
+    // Export JSON
+    if (exportJsonBtn) {
+      exportJsonBtn.addEventListener('click', () => {
+        const rows = document.querySelectorAll('.field-row');
+        const customData = {};
+        rows.forEach(r => {
+          const keyEl = r.querySelector('[data-key]');
+          if (keyEl) {
+            customData[keyEl.getAttribute('data-key')] = r.children[2].innerText.trim();
+          }
+        });
+
+        const fullConfig = {
+          profile: {
+            login: 'octo-coder',
+            name: document.querySelector('[name="name"]').value,
+            email: document.querySelector('[name="email"]').value,
+            bio: document.querySelector('[name="bio"]').value,
+            blog: document.querySelector('[name="blog"]').value,
+            company: document.querySelector('[name="company"]').value,
+            location: document.querySelector('[name="location"]').value,
+            twitter_username: document.querySelector('[name="twitter_username"]').value,
+          },
+          custom_fields: customData,
+          exported_at: new Date().toISOString()
+        };
+
+        const blob = new Blob([JSON.stringify(fullConfig, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `github-profile-octo-coder-${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('配置 JSON 已成功导出下载');
+      });
+    }
+
+    // Save and Publish
+    if (saveProfileBtn) {
+      saveProfileBtn.addEventListener('click', () => {
+        saveProfileBtn.classList.add('opacity-75');
+        setTimeout(() => {
+          saveProfileBtn.classList.remove('opacity-75');
+          showToast('档案信息及自定义字段已成功同步并持久化！');
+        }, 600);
+      });
+    }
+  })();
+</script></main></div></body></html>

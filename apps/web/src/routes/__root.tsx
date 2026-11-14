@@ -1,3 +1,4 @@
+import { ToastProvider } from "@hono_homework_2/ui/components/console/toast";
 import { Toaster } from "@hono_homework_2/ui/components/sonner";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -7,8 +8,6 @@ import {
 	Outlet,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-
-import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import type { trpc } from "@/utils/trpc";
 
@@ -24,11 +23,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 	head: () => ({
 		meta: [
 			{
-				title: "hono_homework_2",
+				title: "GitHub Inspector",
 			},
 			{
 				name: "description",
-				content: "hono_homework_2 is a web application",
+				content: "GitHub profile & custom metadata field manager",
 			},
 		],
 		links: [
@@ -48,12 +47,12 @@ function RootComponent() {
 				attribute="class"
 				defaultTheme="dark"
 				disableTransitionOnChange
+				forcedTheme="dark"
 				storageKey="vite-ui-theme"
 			>
-				<div className="grid h-svh grid-rows-[auto_1fr]">
-					<Header />
+				<ToastProvider>
 					<Outlet />
-				</div>
+				</ToastProvider>
 				<Toaster richColors />
 			</ThemeProvider>
 			<TanStackRouterDevtools position="bottom-left" />

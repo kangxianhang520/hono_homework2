@@ -1,0 +1,101 @@
+/*
+ * Obsidian Forge design tokens (from the Stitch "GitHub Profile Field Manager" DESIGN.md).
+ *
+ * Tokens that do not collide with shadcn are declared in @theme, so Tailwind
+ * generates utilities such as bg-surface-container-low / text-on-surface-variant.
+ * primary / background / foreground already exist as shadcn CSS variables, so we
+ * re-point those variables instead of redeclaring the theme keys.
+ */
+
+@theme {
+	/* ---- Colors ---- */
+	--color-surface: #10141a;
+	--color-surface-dim: #10141a;
+	--color-surface-bright: #353940;
+	--color-surface-container-lowest: #0a0e14;
+	--color-surface-container-low: #181c22;
+	--color-surface-container: #1c2026;
+	--color-surface-container-high: #262a31;
+	--color-surface-container-highest: #31353c;
+	--color-on-surface: #dfe2eb;
+	--color-on-surface-variant: #bbcabf;
+	--color-outline: #86948a;
+	--color-outline-variant: #3c4a42;
+	--color-on-primary: #003824;
+	--color-primary-container: #10b981;
+	--color-secondary-fixed-dim: #c0c1ff;
+	--color-tertiary: #ffb95f;
+	--color-error: #ffb4ab;
+
+	/* ---- Typography ---- */
+	--font-display: "Geist", ui-sans-serif, system-ui, sans-serif;
+	--font-code: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+	--text-headline-lg: 24px;
+	--text-headline-lg--line-height: 32px;
+	--text-headline-lg--letter-spacing: -0.02em;
+	--text-headline-lg--font-weight: 600;
+
+	--text-headline-sm: 18px;
+	--text-headline-sm--line-height: 26px;
+	--text-headline-sm--letter-spacing: -0.01em;
+	--text-headline-sm--font-weight: 500;
+
+	--text-body-md: 14px;
+	--text-body-md--line-height: 20px;
+
+	--text-body-sm: 12px;
+	--text-body-sm--line-height: 18px;
+	--text-body-sm--letter-spacing: 0.01em;
+
+	--text-label-ui: 12px;
+	--text-label-ui--line-height: 16px;
+	--text-label-ui--letter-spacing: 0.02em;
+	--text-label-ui--font-weight: 500;
+
+	--text-label-code: 13px;
+	--text-label-code--line-height: 18px;
+	--text-label-code--letter-spacing: -0.01em;
+	--text-label-code--font-weight: 500;
+
+	--text-label-code-sm: 11px;
+	--text-label-code-sm--line-height: 16px;
+
+	/* ---- Spacing (4px baseline) ---- */
+	--spacing-space-xs: 0.25rem;
+	--spacing-space-sm: 0.5rem;
+	--spacing-space-md: 1rem;
+	--spacing-space-lg: 1.5rem;
+	--spacing-space-xl: 2.5rem;
+
+	/* ---- Shapes (semi-sharp; kept separate from shadcn's radius scale) ---- */
+	--radius-chip: 0.125rem;
+	--radius-control: 0.25rem;
+	--radius-panel: 0.5rem;
+	--radius-pill: 0.75rem;
+}
+
+/* Re-point the shadcn variables the design also uses (bg-primary, bg-background …). */
+:root,
+.dark {
+	--background: #10141a;
+	--foreground: #dfe2eb;
+	--primary: #4edea3;
+	--primary-foreground: #003824;
+}
+
+@layer base {
+	html,
+	body {
+		font-family: var(--font-display);
+	}
+
+	body {
+		overscroll-behavior: none;
+		@apply bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary;
+	}
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+}

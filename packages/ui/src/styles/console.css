@@ -1,0 +1,10 @@
+/*
+ * Console design system (Obsidian Forge): tokens + composite utilities used by
+ * @hono_homework_2/ui/components/console/*. Import AFTER globals.css so the
+ * shadcn variable overrides win:
+ *
+ *   @import "@hono_homework_2/ui/globals.css";
+ *   @import "@hono_homework_2/ui/console.css";
+ */
+@import "./console-theme.css";
+@import "./console-utilities.css";
