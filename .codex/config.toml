@@ -10,10 +10,6 @@ args = ["-y", "@upstash/context7-mcp"]
 command = "npx"
 args = ["-y", "shadcn@latest", "mcp"]
 
-[mcp_servers.neon]
-type = "http"
-url = "https://mcp.neon.tech/mcp"
-
 [mcp_servers.better-auth]
 type = "http"
 url = "https://mcp.better-auth.com/mcp"

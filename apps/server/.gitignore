@@ -20,20 +20,16 @@ dist/
 /.next/
 .vercel
 prisma/generated/
-
-
 # deps
 node_modules/
 /node_modules
 /.pnp
 .pnp.*
-
 # env
 .env*
 .env.production
 !.env.example
 .dev.vars
-
 # logs
 logs/
 *.log
@@ -42,17 +38,15 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
 # misc
 .DS_Store
 *.pem
-
 # local db
 *.db*
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
 !.env.schema
 /src/env.ts
+dist-lambda
+dist-lambda-migrate

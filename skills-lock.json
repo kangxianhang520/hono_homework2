@@ -25,12 +25,6 @@
       "skillPath": "skills/hono/SKILL.md",
       "computedHash": "b9aa6ed86fce02216f2f43c4b5c651ba0055f0785a568d84fc446721fc832172"
     },
-    "neon-postgres": {
-      "source": "neondatabase/agent-skills",
-      "sourceType": "github",
-      "skillPath": "skills/neon-postgres/SKILL.md",
-      "computedHash": "0e1db49f25e9208cb24fa2084a542d52d60a85c09271b915acc3dad6901de6a0"
-    },
     "shadcn": {
       "source": "shadcn-ui/ui",
       "sourceType": "github",

@@ -15,6 +15,8 @@
     "includes": [
       "!**/.next",
       "!**/dist",
+      "!**/dist-lambda",
+      "!**/dist-lambda-migrate",
       "!**/.turbo",
       "!**/.nx",
       "!**/dev-dist",
@@ -30,14 +32,27 @@
       "!**/.svelte-kit",
       "!**/wrangler.jsonc",
       "!**/.source",
-      "!**/convex/_generated"
+      "!**/convex/_generated",
+      "!**/.agents",
+      "!**/.claude",
+      "!apps/server/src/env.ts",
+      "!apps/web/src/env.ts",
+      "!packages/db/src/env.ts",
+      "!apps/web/public/stitch-design.html",
+      "!apps/docs/public/favicon.svg"
     ]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "tab"
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -74,5 +89,26 @@
     "parser": {
       "tailwindDirectives": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["packages/ui/src/components/*.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useSemanticElements": "off",
+            "useKeyWithClickEvents": "off",
+            "noNoninteractiveElementInteractions": "off",
+            "noLabelWithoutControl": "off"
+          },
+          "performance": {
+            "noJsxPropsBind": "off"
+          },
+          "style": {
+            "noExportedImports": "off"
+          }
+        }
+      }
+    }
+  ]
 }

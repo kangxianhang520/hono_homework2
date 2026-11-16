@@ -14,6 +14,8 @@
     "db:generate": "turbo run db:generate -F @hono_homework_2/db --",
     "db:migrate": "turbo run db:migrate -F @hono_homework_2/db --",
     "db:push": "turbo run db:push -F @hono_homework_2/db --",
+    "db:start": "docker compose up -d --wait postgres",
+    "db:stop": "docker compose stop postgres",
     "db:studio": "turbo run db:studio -F @hono_homework_2/db --",
     "dev": "turbo run dev",
     "dev:server": "turbo run dev -F server --",

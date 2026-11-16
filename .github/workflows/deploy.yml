@@ -1,0 +1,75 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Never run two deployments of the same stack at once.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  id-token: write # required for GitHub OIDC -> AWS IAM role
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      # Needed by `vite build` inside `pnpm check-types` for apps/web.
+      VITE_SERVER_URL: ${{ vars.VITE_SERVER_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint & type check
+        run: pnpm check && pnpm check-types
+
+      - name: Build Lambda bundles (API + migrations)
+        run: pnpm turbo run build -F server
+
+      - uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Validate template
+        run: sam validate --lint
+
+      # No `sam build`: the bundle in apps/server/dist-lambda is already
+      # self-contained (tsdown), and `sam deploy` zips CodeUri as-is.
+      - name: Deploy
+        run: >-
+          sam deploy
+          --region ${{ vars.AWS_REGION }}
+          --no-confirm-changeset
+          --no-fail-on-empty-changeset
+          --parameter-overrides
+          CorsOrigin=${{ vars.CORS_ORIGIN }}
+          BetterAuthUrl=${{ vars.BETTER_AUTH_URL }}
+
+      # RDS is in a private subnet, so migrations run in the VPC via a Lambda.
+      - name: Run database migrations
+        run: |
+          fn=$(aws cloudformation describe-stacks --stack-name hono-homework-2 \
+            --query "Stacks[0].Outputs[?OutputKey=='MigrateFunctionName'].OutputValue" --output text)
+          err=$(aws lambda invoke --function-name "$fn" \
+            --cli-read-timeout 310 --payload '{}' --cli-binary-format raw-in-base64-out \
+            --query FunctionError --output text migrate-result.json)
+          cat migrate-result.json
+          if [ "$err" != "None" ]; then echo "Migration failed: $err"; exit 1; fi

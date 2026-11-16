@@ -12,10 +12,6 @@
       "command": "npx",
       "args": ["-y", "shadcn@latest", "mcp"]
     },
-    "neon": {
-      "type": "http",
-      "url": "https://mcp.neon.tech/mcp"
-    },
     "better-auth": {
       "type": "http",
       "url": "https://mcp.better-auth.com/mcp"

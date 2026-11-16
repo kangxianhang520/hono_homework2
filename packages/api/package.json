@@ -15,6 +15,7 @@
     "@trpc/server": "catalog:",
     "@types/pg": "^8.23.1",
     "drizzle-orm": "catalog:",
+    "pg": "^8.23.1",
     "zod": "catalog:"
   },
   "devDependencies": {

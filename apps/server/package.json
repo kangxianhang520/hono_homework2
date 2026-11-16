@@ -24,6 +24,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.1169.0",
     "@hono_homework_2/config": "workspace:*",
     "@types/node": "^26.4.1",
     "tsdown": "^0.23.0",

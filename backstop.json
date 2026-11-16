@@ -1,35 +1,33 @@
 {
-	"id": "github-profile-field-manager",
-	"viewports": [
-		{ "label": "stitch-desktop", "width": 1280, "height": 1568 }
-	],
-	"scenarios": [
-		{
-			"label": "profile-manager",
-			"url": "http://127.0.0.1:4173/",
-			"referenceUrl": "file:///Users/yingcai/yd_study/hono_homework_2/artifacts/stitch-reference.html",
-			"selectors": ["document"],
-			"misMatchThreshold": 4.9,
-			"requireSameDimensions": true,
-			"delay": 5000
-		}
-	],
-	"paths": {
-		"bitmaps_reference": "artifacts/backstop/reference",
-		"bitmaps_test": "artifacts/backstop/test",
-		"engine_scripts": "backstop_data/engine_scripts",
-		"html_report": "artifacts/backstop/html_report",
-		"ci_report": "artifacts/backstop/ci_report"
-	},
-	"engine": "puppeteer",
-	"engineOptions": {
-		"executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-		"defaultViewport": {
-			"width": 1280,
-			"height": 1568,
-			"deviceScaleFactor": 2
-		}
-	},
-	"report": ["browser", "CI"],
-	"debug": false
+  "id": "github-profile-field-manager",
+  "viewports": [{ "label": "stitch-desktop", "width": 1280, "height": 1568 }],
+  "scenarios": [
+    {
+      "label": "profile-manager",
+      "url": "http://127.0.0.1:4173/",
+      "referenceUrl": "file:///Users/yingcai/yd_study/hono_homework_2/artifacts/stitch-reference.html",
+      "selectors": ["document"],
+      "misMatchThreshold": 4.9,
+      "requireSameDimensions": true,
+      "delay": 5000
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "artifacts/backstop/reference",
+    "bitmaps_test": "artifacts/backstop/test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "artifacts/backstop/html_report",
+    "ci_report": "artifacts/backstop/ci_report"
+  },
+  "engine": "puppeteer",
+  "engineOptions": {
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "defaultViewport": {
+      "width": 1280,
+      "height": 1568,
+      "deviceScaleFactor": 2
+    }
+  },
+  "report": ["browser", "CI"],
+  "debug": false
 }
