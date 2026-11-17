@@ -1,60 +1,122 @@
 import { Panel } from "@hono_homework_2/ui/components/console/panel";
 import { StatusDot } from "@hono_homework_2/ui/components/console/status-dot";
+import { Skeleton } from "@hono_homework_2/ui/components/skeleton";
 import { cx } from "@hono_homework_2/ui/lib/cx";
+import { useEffect, useState } from "react";
 
-import { TELEMETRY } from "../data";
+import { PLACEHOLDER } from "@/components/layout/placeholder";
 
-import { ActivitySparkline } from "./activity-sparkline";
+import {
+	formatQuotaPercent,
+	formatRelativeTime,
+	type LatencyTone,
+	latencyTone,
+} from "../lib/telemetry-view";
 
-export function TelemetryCard() {
+const TICK_MS = 1000;
+const SKELETON_METRIC_KEYS = ["latency", "synced", "quota", "node"] as const;
+
+const TONE_CLASS: Record<LatencyTone, string> = {
+	primary: "text-primary",
+	tertiary: "text-tertiary",
+	error: "text-error",
+};
+
+interface TelemetryCardProps {
+	latencyMs: number | null;
+	nodeId: string | null;
+	rateLimit: { limit: number; remaining: number } | null;
+	syncedAt: string | null;
+}
+
+interface MetricProps {
+	label: string;
+	value: string;
+	valueClassName?: string;
+}
+
+function Metric({ label, value, valueClassName }: MetricProps) {
 	return (
-		<Panel className="flex flex-col justify-between lg:col-span-8">
-			<div className="flex items-center justify-between pb-space-sm">
+		<div className="min-w-0 rounded-control bg-surface-container p-space-sm">
+			<span className="block text-outline">{label}</span>
+			<span
+				className={cx(
+					"block truncate font-semibold text-[14px]",
+					valueClassName ?? "text-on-surface"
+				)}
+				title={value}
+			>
+				{value}
+			</span>
+		</div>
+	);
+}
+
+function useNow(active: boolean): number {
+	const [now, setNow] = useState(() => Date.now());
+	useEffect(() => {
+		if (!active) {
+			return;
+		}
+		setNow(Date.now());
+		const id = setInterval(() => setNow(Date.now()), TICK_MS);
+		return () => clearInterval(id);
+	}, [active]);
+	return now;
+}
+
+export function TelemetryCard({
+	latencyMs,
+	syncedAt,
+	rateLimit,
+	nodeId,
+}: TelemetryCardProps) {
+	const now = useNow(syncedAt !== null);
+	const relative = formatRelativeTime(syncedAt, now);
+	const quota = formatQuotaPercent(rateLimit);
+
+	return (
+		<Panel className="flex flex-col gap-space-md lg:col-span-8">
+			<div className="flex items-center justify-between">
 				<div>
 					<span className="eyebrow">Telemetry Insights</span>
 					<h4 className="mt-0.5 font-display text-headline-sm text-on-surface">
-						代码提交与 API 同步热度
+						本次同步即时指标
 					</h4>
 				</div>
 				<div className="flex items-center gap-space-xs rounded-control bg-surface-container px-space-sm py-1 font-code text-label-code-sm">
 					<StatusDot />
-					<span className="text-on-surface">
-						近 30 天 {TELEMETRY.changesLast30Days} 次修改
-					</span>
+					<span className="text-on-surface">Live</span>
 				</div>
 			</div>
 
-			<div className="my-space-md flex flex-col gap-space-sm rounded-panel bg-surface-container-lowest p-space-md">
-				<div className="flex items-center justify-between font-code text-label-code-sm text-outline">
-					<span>Monthly API Activity Density</span>
-					<span>Avg response: {TELEMETRY.avgResponseMs}ms</span>
-				</div>
-				<div className="flex h-24 w-full items-end">
-					<ActivitySparkline />
-				</div>
-				<div className="flex justify-between px-1 font-code text-label-code-sm text-outline">
-					{TELEMETRY.axis.map((tick) => (
-						<span key={tick}>{tick}</span>
-					))}
-				</div>
+			<div className="grid grid-cols-1 gap-space-md font-code text-label-code-sm sm:grid-cols-2">
+				<Metric
+					label="Sync Latency"
+					value={latencyMs === null ? PLACEHOLDER : `${latencyMs}ms`}
+					valueClassName={
+						latencyMs === null ? undefined : TONE_CLASS[latencyTone(latencyMs)]
+					}
+				/>
+				<Metric label="Last Synced" value={relative ?? PLACEHOLDER} />
+				<Metric label="Quota Remaining" value={quota ?? PLACEHOLDER} />
+				<Metric label="GraphQL Node" value={nodeId ?? PLACEHOLDER} />
 			</div>
+		</Panel>
+	);
+}
 
-			<div className="grid grid-cols-1 gap-space-md pt-space-xs font-code text-label-code-sm sm:grid-cols-3">
-				{TELEMETRY.metrics.map((metric) => (
-					<div
-						className="rounded-control bg-surface-container p-space-sm"
-						key={metric.label}
-					>
-						<span className="block text-outline">{metric.label}</span>
-						<span
-							className={cx(
-								"font-semibold text-[14px]",
-								metric.highlight ? "text-primary" : "text-on-surface"
-							)}
-						>
-							{metric.value}
-						</span>
-					</div>
+export function TelemetryCardSkeleton() {
+	return (
+		<Panel
+			aria-busy="true"
+			aria-label="Loading telemetry"
+			className="flex flex-col gap-space-md lg:col-span-8"
+		>
+			<Skeleton className="h-10 w-1/2" />
+			<div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">
+				{SKELETON_METRIC_KEYS.map((key) => (
+					<Skeleton className="h-14 w-full" key={key} />
 				))}
 			</div>
 		</Panel>

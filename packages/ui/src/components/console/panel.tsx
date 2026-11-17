@@ -1,14 +1,15 @@
 import { Icon } from "@hono_homework_2/ui/components/console/icon";
 
 import { cx } from "@hono_homework_2/ui/lib/cx";
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 const SHADOW_CLASSES = {
 	lg: "shadow-lg",
 	xl: "shadow-xl",
 } as const;
 
-interface PanelProps {
+/** Remaining HTML attributes (aria-*, role, id …) are forwarded to the element. */
+interface PanelProps extends ComponentPropsWithoutRef<"section"> {
 	as?: "div" | "section";
 	children: ReactNode;
 	className?: string;
@@ -21,9 +22,10 @@ export function Panel({
 	shadow = "lg",
 	children,
 	className,
+	...rest
 }: PanelProps) {
 	return (
-		<Tag className={cx("panel", SHADOW_CLASSES[shadow], className)}>
+		<Tag {...rest} className={cx("panel", SHADOW_CLASSES[shadow], className)}>
 			{children}
 		</Tag>
 	);

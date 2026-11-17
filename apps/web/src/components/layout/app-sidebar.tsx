@@ -4,17 +4,18 @@ import { cx } from "@hono_homework_2/ui/lib/cx";
 import { type MouseEvent, useCallback, useState } from "react";
 
 import { NAV_ITEMS } from "./nav-items";
+import { PLACEHOLDER } from "./placeholder";
 
 export interface RateLimitInfo {
 	limit: number;
 	remaining: number;
-	resetsIn: string;
+	resetsIn: string | null;
 	resource: string;
 }
 
 interface AppSidebarProps {
 	defaultActiveId?: string;
-	rateLimit: RateLimitInfo;
+	rateLimit: RateLimitInfo | null;
 }
 
 const numberFormat = new Intl.NumberFormat("en-US");
@@ -30,7 +31,7 @@ export function AppSidebar({
 			setActiveId(navId);
 		}
 	}, []);
-	const percent = (rateLimit.remaining / rateLimit.limit) * 100;
+	const percent = rateLimit ? (rateLimit.remaining / rateLimit.limit) * 100 : 0;
 
 	return (
 		<aside className="fixed top-0 left-0 z-50 hidden h-full w-72 flex-col justify-between bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] lg:flex">
@@ -88,17 +89,18 @@ export function AppSidebar({
 						Rate Limit
 					</span>
 					<span className="font-code text-label-code-sm text-primary">
-						{numberFormat.format(rateLimit.remaining)} /{" "}
-						{numberFormat.format(rateLimit.limit)}
+						{rateLimit
+							? `${numberFormat.format(rateLimit.remaining)} / ${numberFormat.format(rateLimit.limit)}`
+							: `${PLACEHOLDER} / ${PLACEHOLDER}`}
 					</span>
 				</div>
 				<ProgressBar value={percent} />
 				<div className="flex items-center justify-between pt-space-xs">
 					<span className="font-code text-label-code-sm text-outline">
-						Resets in {rateLimit.resetsIn}
+						Resets in {rateLimit?.resetsIn ?? PLACEHOLDER}
 					</span>
 					<span className="font-code text-label-code-sm text-on-surface-variant">
-						{rateLimit.resource}
+						{rateLimit?.resource ?? PLACEHOLDER}
 					</span>
 				</div>
 			</div>

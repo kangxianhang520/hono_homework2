@@ -2,13 +2,15 @@ import { Icon } from "@hono_homework_2/ui/components/console/icon";
 import { StatusDot } from "@hono_homework_2/ui/components/console/status-dot";
 import { Fragment, type ReactNode } from "react";
 
+import { PLACEHOLDER } from "./placeholder";
+
 interface AppTopbarProps {
 	/** Right-side toolbar buttons (before the avatar). */
 	actions?: ReactNode;
 	/** Breadcrumb segments; the last one is highlighted. */
 	breadcrumb: readonly string[];
 	/** Masked token label shown in the connection pill. */
-	connectedToken: string;
+	connectedToken: string | null;
 }
 
 export function AppTopbar({
@@ -43,7 +45,7 @@ export function AppTopbar({
 				<div className="hidden h-4 w-px bg-surface-container-high md:block" />
 				<div className="hidden items-center gap-space-xs rounded-pill bg-surface-container-high px-space-sm py-0.5 font-code text-label-code-sm text-primary md:inline-flex">
 					<StatusDot />
-					<span>Token Connected: {connectedToken}</span>
+					<span>Token Connected: {connectedToken ?? PLACEHOLDER}</span>
 				</div>
 			</div>
 

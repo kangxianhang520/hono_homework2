@@ -5,6 +5,7 @@ import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { toast } from "sonner";
 
 import { ENV } from "../env";
+import { loadToken } from "../features/profile-manager/lib/token-storage";
 
 export const queryClient = new QueryClient({
 	queryCache: new QueryCache({
@@ -25,6 +26,10 @@ export const trpcClient = createTRPCClient<AppRouter>({
 	links: [
 		httpBatchLink({
 			url: `${ENV.VITE_SERVER_URL.replace(/\/$/, "")}/trpc`,
+			headers: () => {
+				const token = loadToken();
+				return token ? { "X-GitHub-Token": token } : {};
+			},
 			fetch: (url, options) =>
 				globalThis.fetch(url, {
 					...options,

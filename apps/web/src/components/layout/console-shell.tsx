@@ -6,9 +6,9 @@ import { AppTopbar } from "./app-topbar";
 interface ConsoleShellProps {
 	breadcrumb: readonly string[];
 	children: ReactNode;
-	connectedToken: string;
+	connectedToken: string | null;
 	headerActions?: ReactNode;
-	rateLimit: RateLimitInfo;
+	rateLimit: RateLimitInfo | null;
 }
 
 /** Fixed sidebar + translucent top bar + scrolling main canvas. */

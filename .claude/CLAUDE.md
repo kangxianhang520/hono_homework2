@@ -119,4 +119,4 @@ GitHub 仓库配置:Secret `AWS_DEPLOY_ROLE_ARN`;Variables `AWS_REGION`、`CORS_
 
 ## 项目经验与踩坑记录
 
-@AGENTS.md
+@../AGENTS.md

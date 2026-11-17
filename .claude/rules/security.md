@@ -60,3 +60,20 @@ globs: apps/server/**, apps/web/**, packages/api/**, packages/auth/**, packages/
 - 依赖统一用 `pnpm` 安装,提交 `pnpm-lock.yaml`;新增依赖前确认维护状态与来源,定期 `pnpm audit`。
 - 提交前运行 `pnpm check`(Ultracite/Biome)与 `pnpm check-types`;移除 `console.log`、`debugger`。
 - 发现安全问题(密钥泄露、越权、注入)优先修复并轮换相关凭证,不要在 commit message 或 issue 中贴出密钥原文。
+
+## GitHub Personal Access Token(X-GitHub-Token)
+
+- GitHub PAT 是用户凭证,不是 Better Auth 会话:前端只存在 `sessionStorage`(`features/profile-manager/lib/token-storage.ts` 的 `saveToken`/`loadToken`/`clearToken`),禁止写入 `localStorage`、cookie、URL 查询参数或 React Query 持久化缓存;关闭标签页即失效。
+- 仅通过请求头 `X-GitHub-Token` 传给后端(`apps/web/src/utils/trpc.ts` 的 `headers: () => ...` 每次请求读取),token 不存在时不发送该头;CORS `allowHeaders` 只为它显式放行,不要改成通配。
+- 服务端只在 `apps/server/src/context.ts` 读取该头注入 `ctx.githubToken`,仅用于转发 `api.github.com`;**不得**写入数据库、日志、错误 message、`errorFormatter` 输出或返回给前端。
+- UI 展示只用 `maskToken()` 掩码值;同步失败(401 等)时回滚/`clearToken()`,不让无效 token 残留在存储中。
+- 映射 GitHub 错误为 `TRPCError` 时 message 只用稳定错误码(如 `GITHUB_TOKEN_INVALID`、`GITHUB_UPSTREAM_ERROR`),不夹带上游响应原文或 token;单测须断言错误 message 不含 token。
+- 上游 GitHub 响应一律先按 `unknown` 取回再用 zod `safeParse` 校验,不信任第三方数据结构。
+- 用户自定义字段中的 `Secret` 类型值属于敏感数据:列表/导出默认掩码展示,不写日志,导出前需用户显式确认。
+
+## 云部署与 CI 凭证(AWS SAM + GitHub Actions)
+
+- CI 只用 GitHub OIDC + IAM Role(`aws-actions/configure-aws-credentials`)获取临时凭证,禁止在仓库或 GitHub Secrets 中存长期 Access Key;GitHub Secrets 只放 `AWS_DEPLOY_ROLE_ARN`。
+- 部署角色(`infra/github-oidc-role.yaml`)信任策略限定 `aud=sts.amazonaws.com` 与 `sub=repo:<owner>/<repo>:ref:refs/heads/main`;权限按最小权限授予,禁止 `AdministratorAccess`,`iam:PassRole`/`iam:CreateRole` 仅限本 stack 资源。
+- 敏感配置(数据库密码、`BETTER_AUTH_SECRET`)只放 Secrets Manager,由 Lambda 冷启动时经 `src/lambda-secrets.ts` 读取;不写进 `template.yaml`、`samconfig.toml` 或 Lambda 明文环境变量。
+- Lambda 安全组只放行出站,数据库安全组只允许来自 Lambda 安全组的 5432 入站;不要为调试给 RDS 开公网或放宽到 `0.0.0.0/0`。

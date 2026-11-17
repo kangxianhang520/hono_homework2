@@ -1,26 +1,40 @@
 import { Icon } from "@hono_homework_2/ui/components/console/icon";
 import { Panel } from "@hono_homework_2/ui/components/console/panel";
 import { useCallback, useState } from "react";
+import { PLACEHOLDER } from "@/components/layout/placeholder";
 
-import { ACCOUNT } from "../data";
+import type { IdentityView } from "../lib/profile-view";
 
-function Avatar() {
+const HTTPS_PROTOCOL = "https:";
+
+function isHttpsUrl(url: string | null): url is string {
+	if (!url) {
+		return false;
+	}
+	try {
+		return new URL(url).protocol === HTTPS_PROTOCOL;
+	} catch {
+		return false;
+	}
+}
+
+function Avatar({ alt, url }: { alt: string; url: string | null }) {
 	const [failed, setFailed] = useState(false);
 	const handleError = useCallback(() => setFailed(true), []);
 
 	return (
 		<div className="relative mb-space-md">
 			<div className="flex size-24 items-center justify-center overflow-hidden rounded-pill bg-surface-container-highest shadow-md">
-				{failed ? (
+				{failed || !isHttpsUrl(url) ? (
 					<Icon className="text-outline" name="person" size={48} />
 				) : (
 					// biome-ignore lint/a11y/noNoninteractiveElementInteractions: onError is a load-failure fallback, not a user interaction
 					<img
-						alt={`${ACCOUNT.name} avatar`}
+						alt={alt}
 						className="size-full object-cover"
 						height={96}
 						onError={handleError}
-						src={ACCOUNT.avatarUrl}
+						src={url ?? undefined}
 						width={96}
 					/>
 				)}
@@ -35,31 +49,35 @@ function Avatar() {
 	);
 }
 
-export function IdentityCard() {
+export function IdentityCard({ view }: { view: IdentityView }) {
 	return (
 		<Panel className="relative flex flex-col justify-between overflow-hidden lg:col-span-4">
 			<div className="flex flex-col items-center text-center">
-				<Avatar />
+				<Avatar
+					alt={`${view.name} avatar`}
+					key={view.avatarUrl}
+					url={view.avatarUrl}
+				/>
 				<h3 className="font-display text-headline-lg text-on-surface">
-					{ACCOUNT.name}
+					{view.name}
 				</h3>
 				<div className="mt-1 flex items-center gap-space-xs">
 					<span className="font-code text-label-code text-primary">
-						@{ACCOUNT.login}
+						@{view.login}
 					</span>
 					<span className="text-outline">•</span>
 					<span className="rounded-pill bg-surface-container-high px-2 py-0.5 font-display text-label-ui text-on-surface-variant">
-						{ACCOUNT.role}
+						{view.kindLabel}
 					</span>
 				</div>
 				<p className="mt-space-sm line-clamp-2 text-center text-body-md text-on-surface-variant">
-					{ACCOUNT.bio}
+					{view.bio ?? PLACEHOLDER}
 				</p>
 			</div>
 
 			{/* Quick metrics */}
 			<dl className="my-space-md grid grid-cols-3 gap-space-xs rounded-panel bg-surface-container-lowest/80 p-space-sm text-center">
-				{ACCOUNT.stats.map((stat, index) => (
+				{view.stats.map((stat, index) => (
 					<div
 						className={
 							index === 1
@@ -79,7 +97,7 @@ export function IdentityCard() {
 			</dl>
 
 			<div className="flex flex-col gap-space-xs font-code text-label-code-sm text-on-surface-variant">
-				{ACCOUNT.facts.map((fact) => (
+				{view.facts.map((fact) => (
 					<div className="flex items-center justify-between" key={fact.label}>
 						<span className="flex items-center gap-1.5 text-outline">
 							<Icon name={fact.icon} size={16} />
@@ -90,7 +108,7 @@ export function IdentityCard() {
 				))}
 				<a
 					className="mt-space-sm inline-flex items-center justify-center gap-1 font-display text-label-ui text-primary hover:underline"
-					href={ACCOUNT.profileUrl}
+					href={view.profileUrl}
 					rel="noopener noreferrer"
 					target="_blank"
 				>

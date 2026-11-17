@@ -12,8 +12,10 @@ export async function createContext({
 	const session = await auth.api.getSession({
 		headers: context.req.raw.headers,
 	});
+	const githubToken = context.req.header("X-GitHub-Token")?.trim() || null;
 	return {
 		db,
+		githubToken,
 		session,
 	};
 }

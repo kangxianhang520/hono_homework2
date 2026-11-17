@@ -80,3 +80,33 @@ globs:
 
 - 修改后运行 `pnpm check-types` 与 `pnpm check`(Ultracite/Biome),必要时 `pnpm exec ultracite fix`。
 - 本地联调:`pnpm dev`(server 默认 `http://localhost:3000`,tRPC 端点 `/trpc`,健康检查 `GET /` 与 `healthCheck` procedure)。
+
+## 运行时入口(本地 Node + AWS Lambda)
+
+- 路由与中间件只写在 `apps/server/src/app.ts`(导出共享的 `app`);`src/index.ts`(`@hono/node-server`,本地开发)与 `src/lambda.ts`(`hono/aws-lambda` 的 `handle(app)`)只做启动,**不要在入口文件复制或新增路由**。上文"在 `index.ts` 中添加原生 Hono 路由"一律理解为加在 `app.ts`。
+- `lambda.ts` 必须先 `await loadSecretsIntoEnv()`(`src/lambda-secrets.ts` 从 Secrets Manager 拼出 `DATABASE_URL`/`BETTER_AUTH_SECRET`),再动态 `import("./app")`;任何在模块顶层读取 `ENV` 或创建连接的代码都依赖这个顺序,不要改成静态 import。
+- `env.server.ts` 在 Lambda(存在 `AWS_LAMBDA_FUNCTION_NAME`)中用 zod 校验 `process.env`;`.env.schema` 增改变量时,同步更新该 Lambda schema 与 `template.yaml` 的函数环境变量。
+- 迁移在 VPC 内的 `src/lambda-migrate.ts` 执行,API 进程启动时不要跑迁移。
+
+## 请求上下文与自定义请求头
+
+- tRPC `Context`(`packages/api/src/context.ts`)当前为 `{ db, githubToken, session }`;新增字段先改该类型,再在 `apps/server/src/context.ts` 的 `createContext` 中从 Hono 请求取值。
+- 自定义请求头(如 `X-GitHub-Token`)在 `createContext` 中 `.trim()`,空值归一为 `null`;新增请求头时**必须同步**加入 `app.ts` 中 `cors({ allowHeaders })`,否则浏览器预检失败且服务端无日志。
+- 请求头里的凭证只在单次请求内使用,不写库、不写日志、不回传给前端(需要展示时只返回掩码)。
+
+## 第三方上游调用(GitHub API)
+
+- GitHub 相关代码集中在 `packages/api/src/github/`:`client.ts`(`githubRequest`,统一 Accept/API 版本/User-Agent/Bearer 头与耗时统计)、`errors.ts`(`GithubApiError`)、`headers.ts`(`X-OAuth-Scopes` / `X-RateLimit-*` 解析)、`schemas.ts`(zod 响应 schema)。不要在 router 中直接 `fetch("https://api.github.com/...")`。
+- 需要 GitHub token 的 procedure 使用 `githubProcedure`(`packages/api/src/index.ts`):token 缺失抛 `UNAUTHORIZED`/`GITHUB_TOKEN_MISSING`,并在中间件中通过 `!result.ok && result.error.cause instanceof GithubApiError` 统一调用 `mapGithubError` 映射(用 try/catch 包 `next()` 抓不到 resolver 错误)。
+- 错误码映射:401 → `UNAUTHORIZED`/`GITHUB_TOKEN_INVALID`;403/429 且配额耗尽 → `TOO_MANY_REQUESTS`/`GITHUB_RATE_LIMITED`;其余 403 → `FORBIDDEN`/`GITHUB_FORBIDDEN`;其他(含网络失败 status 0)→ `BAD_GATEWAY`/`GITHUB_UPSTREAM_ERROR`。`message` 只用这些稳定错误码,映射时传 `cause: originalError`,绝不拼入 token。
+- 额外错误字段(如限流 `resetEpoch`,unix 秒)只通过 `initTRPC.create({ errorFormatter })` 从 `error.cause` 合并进 `shape.data`,不要塞进 message。
+- 上游响应先以 `githubRequest<unknown>` 取回,再用 `schemas.ts` 中的 zod schema `safeParse`;GitHub 对未填字段返回显式 `null`,用 `.nullish()` 而非 `.optional()`;校验失败抛 `BAD_GATEWAY`/`GITHUB_UPSTREAM_ERROR`。
+- 响应头解析:`X-OAuth-Scopes` 缺失 → `null`(细粒度 token,未知),存在但为空 → `[]`;`X-RateLimit-*` 缺失或非法返回 `null`,不要产生 `NaN`/`0`。
+- 写回 GitHub 的操作用 `.mutation`;不要在数据库事务内调用 GitHub API。返回给前端的时间统一用 ISO 字符串(如 `syncedAt: new Date().toISOString()`)。
+
+## 后端测试
+
+- `packages/api` 已接入 Vitest(`"test": "vitest run"`),测试位于 `packages/api/src/__tests__/`(沿用现状,新增测试也可与被测文件同目录 `*.test.ts`)。
+- procedure 用 `t.createCallerFactory(router)` 直接调用,ctx 传最小假对象(`{ db: {}, githubToken, session: null } as unknown as Context`),不起 Hono server;Hono 路由层用 `app.request()`。
+- 外部 HTTP 用 `vi.stubGlobal("fetch", vi.fn<typeof fetch>())`,`afterEach` 中 `mockReset()` + `vi.unstubAllGlobals()`;被测代码多次 fetch 时用 `mockImplementation(() => new Response(...))`(Response body 只能读一次)。
+- 错误断言只比对稳定错误码 message,并断言 message 中不包含 token。

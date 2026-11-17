@@ -9,7 +9,8 @@
     "dev": "vite dev",
     "env:generate": "varlock codegen",
     "serve": "vite preview",
-    "start": "vite"
+    "start": "vite",
+    "test": "vitest run"
   },
   "dependencies": {
     "@hono_homework_2/api": "workspace:*",
@@ -43,6 +44,7 @@
     "postcss": "^8.5.30",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "vitest": "^5.1.0"
   }
 }
